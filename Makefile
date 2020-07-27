@@ -3,33 +3,30 @@ CC=arm-none-eabi-gcc
 AR=arm-none-eabi-ar
 
 TOP          = ..
-FREERTOS_DIR = $(TOP)/freertos
 LIB_DIR      = $(TOP)/libraries
-HAL_DIR      = $(LIB_DIR)/STM32F4xx_HAL_Driver
+HAL_DIR      = $(LIB_DIR)/STM32L0xx_HAL_Driver
 CMSIS_DIR    = $(LIB_DIR)/CMSIS
 
 INCDIR = . \
          src \
          $(TOP)/include/config \
-         $(FREERTOS_DIR)/FreeRTOS/Source/include \
-         $(FREERTOS_DIR)/FreeRTOS/Source/portable/GCC/ARM_CM4F \
          $(LIB_DIR) \
-         $(HAL_DIR)/Inc \
+         $(HAL_DIR)/inc \
          $(CMSIS_DIR)/Include \
-         $(CMSIS_DIR)/Device/ST/STM32F4xx/Include
+         $(CMSIS_DIR)/Device/ST/STM32L0xx/Include
 
 OBJDIR=obj
 
-MCU=cortex-m4
-DEVICE=STM32F401xC
+MCU=cortex-m0plus
+DEVICE=STM32L082xx
 
 ###########################################
 
 vpath %.c src
 
-CDEFS = -DCFG_TUSB_MCU=OPT_MCU_STM32F4
+CDEFS = -DCFG_TUSB_MCU=OPT_MCU_STM32L0
 
-CFLAGS  = -mcpu=$(MCU) -mlittle-endian  -mthumb -march=armv7e-m -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+CFLAGS  = -mlittle-endian -mthumb -mcpu=$(MCU) -march=armv6s-m
 CFLAGS += -g -O2 -Wall -D$(DEVICE) -DUSE_HAL_DRIVER -fstack-usage
 CFLAGS += -ffreestanding -nostdlib -ffunction-sections -fdata-sections -Wl,--gc-sections
 CFLAGS  += $(patsubst %,-I%, $(INCDIR))
