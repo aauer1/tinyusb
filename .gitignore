@@ -1,5 +1,7 @@
 html
 latex
+obj/
+*.a
 *.d
 *.o
 *.P

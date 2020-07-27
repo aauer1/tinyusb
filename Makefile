@@ -32,7 +32,7 @@ CFLAGS += -ffreestanding -nostdlib -ffunction-sections -fdata-sections -Wl,--gc-
 CFLAGS  += $(patsubst %,-I%, $(INCDIR))
 CFLAGS += $(CDEFS)
 
-SRCS = portable/st/synopsys/dcd_synopsys.c \
+SRCS = portable/st/stm32_fsdev/dcd_stm32_fsdev.c \
        device/usbd.c \
        device/usbd_control.c \
        class/cdc/cdc_device.c \
